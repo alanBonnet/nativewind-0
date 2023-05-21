@@ -11,8 +11,8 @@ import { NavigationContainer } from '@react-navigation/native';
 // const Styled_FlatList = styled(FlatList);
 // const Styled_Image = styled(Image);
 import {createMaterialBottomTabNavigator} from '@react-navigation/material-bottom-tabs'
-import RickyMartin from './components/RickyMartin';
-import RickyMartin2 from './components/RickyMartin2';
+import RickyMartin from './views/RickyMartin';
+import RickyMartin2 from './views/RickyMartin2';
 // const Background__Image = require('./assets/rick-and-morty.jpg');
 
 const Tab = createMaterialBottomTabNavigator()
