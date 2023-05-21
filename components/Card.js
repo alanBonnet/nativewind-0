@@ -8,7 +8,7 @@ const Styled_Text = styled(Text);
 // const Styled_ = styled()
 const Styled_Image = styled(Image);
 
-const StatusPj = ({ status, colorStatus }) => {
+const StatusPj = ({ status }) => {
     const ifUnknow = status === 'unknown' ? '' : status;
     const Icons = status.toLowerCase() === 'alive' ? (
         <Icon name='heart' solid size={22} ></Icon>
@@ -17,10 +17,41 @@ const StatusPj = ({ status, colorStatus }) => {
             :
             (<Icon name='question' size={22}></Icon>)
 
+    const colorStatus = status.toLowerCase().includes("alive") ?
+        "green-300" :
+        status.toLowerCase().includes("dead") ?
+            "red-400" :
+            "gray-400"
+        ;
     return (
         <Styled_Text className="text-white text-xl">
             {"Status: "}
             <Styled_Text className={`text-${colorStatus}`}>
+                {ifUnknow} {Icons}
+            </Styled_Text>
+        </Styled_Text>
+    );
+}
+const GenderPj = ({ gender }) => {
+    const ifUnknow = gender === 'unknown' ? '' : gender;
+    const Icons = gender.toLowerCase() === 'male' ? (
+        <Icon name='mars' solid size={22} ></Icon>
+    ) :
+        gender.toLowerCase() === 'female' ?
+            (<Icon name='venus' size={22}></Icon>) :
+            gender.toLowerCase() === 'genderless' ?
+                (<Icon name='genderless' size={22}></Icon>) :
+                (<Icon name='question' size={22}></Icon>)
+    const colorGender = gender.toLowerCase() == "male" ?
+        "blue-300" :
+        gender.toLowerCase() == "female" ?
+            "red-200" :
+            "gray-400"
+        ;
+    return (
+        <Styled_Text className="text-white text-xl">
+            {"Gender: "}
+            <Styled_Text className={`text-${colorGender}`}>
                 {ifUnknow} {Icons}
             </Styled_Text>
         </Styled_Text>
@@ -32,14 +63,14 @@ const SpeciePj = ({ specie }) => (
     </Styled_Text>
 );
 
-// const PruebaPj = ({item}) => (
-//     <Styled_Text className="text-white text-xl">
-//         {JSON.stringify(item)}
-//     </Styled_Text>
-//);
-const LocationOrOrigin = ({ text = "Location", location }) => {
-    const ifUnknow = location.name === "unknown" ? "" : location.name;
-    const ifUnknowIcon = location.name === "unknown" ? (
+const PruebaPj = ({ item }) => (
+    <Styled_Text className="text-white text-xl">
+        {JSON.stringify(item)}
+    </Styled_Text>
+);
+const BasicInfo = ({ text, info }) => {
+    const ifUnknow = info === "unknown" ? "" : info;
+    const ifUnknowIcon = info === "unknown" ? (
         <Styled_Text className="text-gray-400">
             <Icon name='question' size={22}></Icon>
         </Styled_Text>
@@ -51,21 +82,23 @@ const LocationOrOrigin = ({ text = "Location", location }) => {
     );
 }
 // Partes de la Tarjeta Inicio
-const ImgCard = ({ uri, img,mostrarInfo,setMostrarInfo }) => (
-    <TouchableOpacity onPress={()=>{
+const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo }) => (
+    <TouchableOpacity onPress={() => {
         setMostrarInfo(!mostrarInfo)
     }}>
         <Styled_Image source={uri} resizeMode='cover' style={{ width: img.size.width, height: img.size.height }} className='rounded-full' />
     </TouchableOpacity>
 )
 
-const BodyCard = ({ item, colorStatus }) => (
+const BodyCard = ({ item }) => (
     <Styled_View className="bg-violet-800/60 p-2 rounded w-screen text-center my-2 px-5">
         <Styled_Text className="text-white text-2xl text-center">{item.name}</Styled_Text>
-        <StatusPj status={item.status} colorStatus={colorStatus} />
+        <StatusPj status={item.status} />
         <SpeciePj specie={item.species} />
-        <LocationOrOrigin text="Origin" location={item.origin} />
-        <LocationOrOrigin location={item.location} />
+        <GenderPj gender={item.gender} />
+        <BasicInfo text="Origin" info={item.origin.name} />
+        <BasicInfo text="Last known location" info={item.location.name} />
+        {/* <PruebaPj item={item} ></PruebaPj> */}
     </Styled_View>
 )
 
@@ -92,19 +125,13 @@ const Card = ({ item, personajes, setPersonajes }) => {
             height: 150
         }
     }
-    const colorStatus = item.status.toLowerCase().includes("alive") ?
-        "green-300" :
-        item.status.toLowerCase().includes("dead") ?
-            "red-400" :
-            "gray-400"
-        ;
     const imgPj = { uri: item.image };
     return (
         <Styled_View className='container items-center bg-violet-400/40 mb-12 py-2 mt-6'>
-            <ImgCard uri={imgPj} img={img} mostrarInfo={mostrarBody} setMostrarInfo={setMostrarBody}/>
+            <ImgCard uri={imgPj} img={img} mostrarInfo={mostrarBody} setMostrarInfo={setMostrarBody} />
             {mostrarBody && (
                 <>
-                    <BodyCard item={item} colorStatus={colorStatus} />
+                    <BodyCard item={item} />
                     <BotonEliminar item={item} personajes={personajes} setPersonajes={setPersonajes} />
                 </>
             )}

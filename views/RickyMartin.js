@@ -27,7 +27,7 @@ const RickyMartin = () => {
     );
 
     const reiniciarLista = () => {
-        setLimite({...limite,inicio:1,fin:10});
+        setLimite({ ...limite, inicio: 1, fin: 10 });
         traerPjs()
     }
     const traerPjs = async () => {
@@ -40,10 +40,12 @@ const RickyMartin = () => {
     }
 
     const cargarMasPjs = () => {
-        const limiteFin = limite.fin + 10;
-        const limiteDesde = limite.inicio + 10
-        setLimite({ ...limite, fin: limiteFin, inicio: limiteDesde })
-        traerNuevosPjs(limite.fin, limiteDesde)
+        if (listita.length < 821) {
+            const limiteFin = limite.fin + 10;
+            const limiteDesde = limite.inicio + 10
+            setLimite({ ...limite, fin: limiteFin, inicio: limiteDesde })
+            traerNuevosPjs(limite.fin, limiteDesde)
+        }
     }
     useEffect(() => {
         traerPjs()
@@ -66,7 +68,7 @@ const RickyMartin = () => {
                                 Rick y Morty
                             </Styled_Text>
                         </Styled_View>
-                        {listita.length > 10 && <Styled_TouchableOpacity onPress={reiniciarLista} className='bg-violet-200/20 py-2'>
+                        {listita.length != 10 && <Styled_TouchableOpacity onPress={reiniciarLista} className='bg-violet-200/20 py-2'>
                             <Styled_Text className='text-white text-center'>
                                 <Icon name='redo' size={20} />
                             </Styled_Text>
