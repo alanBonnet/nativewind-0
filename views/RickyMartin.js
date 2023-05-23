@@ -51,7 +51,8 @@ const RickyMartin = () => {
     }
     useEffect(() => {
         traerPjs()
-        setLimite({ ...limite, inicio: 1, fin: 10 })
+        setLimite({ ...limite, inicio: 1, fin: 10 });
+        setShowContent(!showContent)
     }, [])
     useEffect(() => {
         if (listita.length > 0) {
@@ -61,7 +62,7 @@ const RickyMartin = () => {
         }
     }, [listita])
     return (
-        <Styled_View className={`container pt-9 justify-center bg-violet-400 items-center`}>
+        <Styled_View className={`container justify-center bg-violet-400 items-center`}>
             <Styled_ImageBackground className='w-full h-full' source={Background__Image} resizeMode='cover' blurRadius={blurVal}>
                 <Styled_View className={blurVal > 0 ? "bg-gray-100/10" : ""}>
                     <Styled_View className="">
@@ -76,19 +77,6 @@ const RickyMartin = () => {
                             </Styled_Text>
                         </Styled_TouchableOpacity>}
                     </Styled_View>
-                    {!showContent && <Styled_View className='relative h-full w-screen'>
-                        <Styled_TouchableOpacity className='absolute bottom-[200] inset-x-4 bg-violet-500/50 rounded-lg border-gray-200 border-4 py-6' onPress={() => {
-                            setShowContent(!showContent)
-                        }}>
-                            <Styled_Text style={styles.text2} className='text-center text-green-200 text-xl'>
-                                Mostrar Personajes
-                            </Styled_Text>
-                        </Styled_TouchableOpacity>
-                    </Styled_View>
-
-
-                    }
-
                     {showContent && <Styled_View className="mb-24">
                         <FlatList data={listita} renderItem={mostrarPjs} onEndReached={cargarMasPjs} keyExtractor={(item) => item.id} />
                     </Styled_View>}

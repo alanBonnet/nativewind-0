@@ -22,7 +22,7 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
             </TouchableOpacity>
             {confirmacion && <View>
                 <Styled_TouchableOpacity
-                    onLongPress={() => { setConfirmacion(!confirmacion) }}
+                    onPress={() => { setConfirmacion(!confirmacion) }}
                 >
                     <Styled_Image source={uri} resizeMode='cover' style={{ width: img.size.width, height: img.size.height }} className='rounded-full mx-auto' />
                 </Styled_TouchableOpacity>
@@ -43,7 +43,7 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
                         <Styled_TouchableOpacity
                             onPress={() => { setConfirmacion(!confirmacion) }}
 
-                            className="flex-1 w-full bg-red-500/90 rounded-lg my-2">
+                            className="flex-1 w-full bg-red-500/90 rounded-lg my-2 py-1">
                             <Styled_Text className="text-white text-2xl text-center">
                                 No
                             </Styled_Text>

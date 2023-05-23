@@ -11,37 +11,48 @@ import { NavigationContainer } from '@react-navigation/native';
 // const Styled_FlatList = styled(FlatList);
 // const Styled_Image = styled(Image);
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs'
+import Home from './views/Home';
 import RickyMartin from './views/RickyMartin';
-import RickyMartin2 from './views/RickyMartin2';
 import { loadCustomFonts } from './styles';
+import { createStackNavigator } from '@react-navigation/stack';
+import Icon from 'react-native-vector-icons/FontAwesome5'
+
 // const Background__Image = require('./assets/rick-and-morty.jpg');
 
 const Tab = createMaterialBottomTabNavigator()
+const Stack = createStackNavigator()
 
 const App = () => {
-  const [fontLoaded, setFontLoaded] = useState(false)
+    const [fontLoaded, setFontLoaded] = useState(false)
 
-  useEffect(() => {
-    const loadFont = async () => {
-      await loadCustomFonts();
-      setFontLoaded(true);
-    };
+    useEffect(() => {
+        const loadFont = async () => {
+            await loadCustomFonts();
+            setFontLoaded(true);
+        };
 
-    loadFont();
-  }, [])
+        loadFont();
+    }, [])
 
-  if (!fontLoaded) {
-    return null; // Otra vista de carga o indicador de carga
-  }
-  return (
-    <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name='RickyMartin' component={RickyMartin} />
-        <Tab.Screen name='RickyMartin2' component={RickyMartin2} />
+    if (!fontLoaded) {
+        return null; // Otra vista de carga o indicador de carga
+    }
+    return (
+        <NavigationContainer>
+            <Stack.Navigator initialRouteName='Home'>
+                <Stack.Screen name='Home' component={Home} options={{
+                    headerShown: false,
+                }} />
+                <Stack.Screen name='Rick & Morty' component={RickyMartin} options={{
+                    headerStyle: {
+                        backgroundColor: "#c4b5fd",
+                    },
+                    headerTitle:()=><Icon name='home' size={24} />
+                }} />
 
-      </Tab.Navigator>
-    </NavigationContainer>
-  );
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
 
 export default withExpoSnack(App);
