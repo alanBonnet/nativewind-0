@@ -4,6 +4,7 @@ import { Text, View, Image, TouchableOpacity } from 'react-native';
 // Partes de la Tarjeta Inicio
 import ImgCard from '../layout/Card/CardParts/ImgCard';
 import BodyCard from '../layout/Card/BodyCard';
+import diccionario from '../diccionario/diccionario'
 
 const Styled_View = styled(View);
 const Styled_Text = styled(Text);
@@ -29,18 +30,7 @@ const BotonEliminar = ({ item, personajes, setPersonajes }) => (
 );
 // Partes de la Tarjeta Fin
 
-const esVillano = (nombre, siEs) => {
-    return nombre?.toLowerCase()?.includes(siEs.toLowerCase())??false;
-}
-const detectarMultiplesVillanos = (nombre,ees) => {
-    const villaneitor = [];
-        for(let esVillanoxd of ees){
-            if(esVillano(nombre,esVillanoxd)){
-                villaneitor.push(nombre)
-            }
-        }
-    return villaneitor.length > 0
-}
+
 
 const villanos = [
     "toxic", 
@@ -49,7 +39,9 @@ const villanos = [
     "evil", 
     "mytho",
     "hepatitis", 
-    "coli"
+    "coli",
+    "creepy",
+    "gibble"
 ]
 
 const Card = ({ item, personajes, setPersonajes }) => {
@@ -60,7 +52,7 @@ const Card = ({ item, personajes, setPersonajes }) => {
             height: 150
         }
     }
-    const ifVillano = detectarMultiplesVillanos(item.name,villanos);
+    const ifVillano = diccionario['marcarComoVillano'](item.name,villanos);
     const imgPj = { uri: item.image };
     return (
         <Styled_View className={`container items-center ${ifVillano ? 'bg-red-500/60' : 'bg-violet-400/40'} mb-12 py-2 mt-6`}>

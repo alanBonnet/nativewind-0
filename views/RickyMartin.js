@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { styled } from 'nativewind';
-import { Text, View, ImageBackground, Image, FlatList, TouchableOpacity } from 'react-native';
+import { Text, View, ImageBackground, Image, FlatList, TouchableOpacity, TextInput } from 'react-native';
 import diccionario from '../diccionario/diccionario';
 import Card from '../components/Card';
 import Icon from 'react-native-vector-icons/FontAwesome5'
@@ -13,6 +13,7 @@ const Styled_ImageBackground = styled(ImageBackground);
 const Styled_FlatList = styled(FlatList);
 const Styled_TouchableOpacity = styled(TouchableOpacity);
 // const Styled_ = styled()
+const Styled_TextInput = styled(TextInput);
 const Background__Image = require('../assets/rick-and-morty.jpg');
 
 const RickyMartin = () => {
@@ -22,6 +23,7 @@ const RickyMartin = () => {
         inicio: 1,
         fin: 10
     })
+    const [buscarPjs, setBuscarPjs] = useState("")
     const [showContent, setShowContent] = useState(false)
     const urlBase = 'https://rickandmortyapi.com/api/character';
     const mostrarPjs = ({ item }) => (
@@ -70,6 +72,19 @@ const RickyMartin = () => {
                             <Styled_Text style={styles.text} className='text-center text-4xl text-green-500 py-4'>
                                 Rick y Morty
                             </Styled_Text>
+                            {/* <Styled_View className='flex flex-row self-center' >
+                                <Styled_TextInput
+                                    className='basis-1/2 bg-violet-100/50 py-2 px-3 w-1/2 rounded-lg ml-2 mb-2 border-2 border-green-500 text-green-900 text-lg'
+                                    onTextInput={({ nativeEvent }) => { setBuscarPjs(nativeEvent.text) }}
+                                />
+                                <Styled_TouchableOpacity className='basis-1/4 bg-violet-100/20 rounded-lg border-gray-200 justify-self-center pt-3 mb-2' onPress={() => {
+                                    setListita([... listita.filter(e => e.name.includes(buscarPjs))])
+                                }}>
+                                    <Styled_Text className='text-center text-green-300'>
+                                        <Icon name='search' solid size={22} />
+                                    </Styled_Text>
+                                </Styled_TouchableOpacity>
+                            </Styled_View> */}
                         </Styled_View>
                         {listita.length != 10 && <Styled_TouchableOpacity onPress={reiniciarLista} className='bg-violet-200/20 py-2'>
                             <Styled_Text className='text-white text-center'>

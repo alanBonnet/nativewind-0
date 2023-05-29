@@ -16,9 +16,21 @@ const getAllPjs = async (urlBase, limite=10,desde=undefined) => {
     }
 
 }
-
+const esVillano = (nombre, siEs) => {
+    return nombre?.toLowerCase()?.includes(siEs.toLowerCase())??false;
+}
+const detectarMultiplesVillanos = (nombre,ees) => {
+    const villaneitor = [];
+        for(let esVillanoxd of ees){
+            if(esVillano(nombre,esVillanoxd)){
+                villaneitor.push(nombre)
+            }
+        }
+    return villaneitor.length > 0
+}
 const diccionario = {
     getAllPjs: getAllPjs,
+    "marcarComoVillano": detectarMultiplesVillanos
 }
 
 export default diccionario
