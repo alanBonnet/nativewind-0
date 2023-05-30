@@ -1,6 +1,7 @@
 import { styled } from 'nativewind';
 import { useState } from 'react';
 import { Image, TouchableOpacity, Text, View } from 'react-native';
+import { styleScaled } from '../../../assets/styles/styleScaled';
 
 // const Styled_ = styled();
 const Styled_Image = styled(Image);
@@ -18,7 +19,7 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
                 onLongPress={() => { if (!mostrarInfo) { setConfirmacion(!confirmacion) } }}
 
             >
-                {!confirmacion && <Styled_Image source={uri} resizeMode='cover' style={{ width: img.size.width, height: img.size.height }} className='rounded-full mx-auto' />}
+                {!confirmacion && <Styled_Image source={uri} resizeMode='cover' style={{ width: img.size.width, height: img.size.height }} className='rounded-full' />}
             </TouchableOpacity>
             {confirmacion && <View>
                 <Styled_TouchableOpacity
@@ -26,7 +27,7 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
                 >
                     <Styled_Image source={uri} resizeMode='cover' style={{ width: img.size.width, height: img.size.height }} className='rounded-full mx-auto' />
                 </Styled_TouchableOpacity>
-                <Styled_View className="bg-gray-600/80 mt-2 px-3 py-2 rounded-lg">
+                <Styled_View className="bg-gray-600/80 rounded-lg" style={[styleScaled['mt-2'],styleScaled['px-3'],styleScaled['py-2']]}>
                     <Styled_Text className="text-2xl text-center text-gray-100" >
                         ¿Seguro que quieres eliminar a {item.name} ?
                     </Styled_Text>
@@ -35,7 +36,9 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
                             onPress={()=>{
                                 setPersonajes(personajes.filter(pj => !pj.name.includes(item.name)))
                             }}
-                            className="flex-1 w-full bg-blue-400/90 rounded-lg my-2">
+                            className="flex-1 w-full bg-blue-400/90 rounded-lg"
+                            style={styleScaled['my-2']}
+                            >
                             <Styled_Text className="text-white text-2xl text-center">
                                 Si
                             </Styled_Text>
@@ -43,7 +46,9 @@ const ImgCard = ({ uri, img, mostrarInfo, setMostrarInfo, personajes, setPersona
                         <Styled_TouchableOpacity
                             onPress={() => { setConfirmacion(!confirmacion) }}
 
-                            className="flex-1 w-full bg-red-500/90 rounded-lg my-2 py-1">
+                            className="flex-1 w-full bg-red-500/90 rounded-lg"
+                                style={[styleScaled['my-2'],styleScaled['py-1']]}
+                            >
                             <Styled_Text className="text-white text-2xl text-center">
                                 No
                             </Styled_Text>

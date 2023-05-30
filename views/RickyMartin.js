@@ -6,7 +6,7 @@ import diccionario from '../diccionario/diccionario';
 import Card from '../components/Card';
 import Icon from 'react-native-vector-icons/FontAwesome5'
 import { styles } from '../styles';
-
+import { styleScaled } from '../assets/styles/styleScaled';
 const Styled_Text = styled(Text);
 const Styled_View = styled(View)
 const Styled_ImageBackground = styled(ImageBackground);
@@ -65,11 +65,11 @@ const RickyMartin = () => {
     }, [listita])
     return (
         <Styled_View className={`container justify-center bg-violet-400 items-center`}>
-            <Styled_ImageBackground className='w-full h-full' source={Background__Image} resizeMode='cover' blurRadius={blurVal}>
+            <Styled_ImageBackground className='h-full w-full' source={Background__Image} resizeMode='cover' blurRadius={blurVal}>
                 <Styled_View className={blurVal > 0 ? "bg-gray-100/10" : ""}>
                     <Styled_View className="">
                         <Styled_View className='bg-violet-500/80'>
-                            <Styled_Text style={styles.text} className='text-center text-4xl text-green-500 py-4'>
+                            <Styled_Text style={[styles.text, styleScaled['py-4']]} className='text-center text-4xl text-green-500'>
                                 Rick y Morty
                             </Styled_Text>
                             {/* <Styled_View className='flex flex-row self-center' >
@@ -86,13 +86,13 @@ const RickyMartin = () => {
                                 </Styled_TouchableOpacity>
                             </Styled_View> */}
                         </Styled_View>
-                        {listita.length != 10 && <Styled_TouchableOpacity onPress={reiniciarLista} className='bg-violet-200/20 py-2'>
+                        {listita.length != 10 && <Styled_TouchableOpacity style={styleScaled['py-2']} onPress={reiniciarLista} className='bg-violet-200/20'>
                             <Styled_Text className='text-white text-center'>
                                 <Icon name='redo' size={20} />
                             </Styled_Text>
                         </Styled_TouchableOpacity>}
                     </Styled_View>
-                    {showContent && <Styled_View className="mb-24">
+                    {showContent && <Styled_View style={styleScaled['mb-flatlist']}>
                         <FlatList data={listita} renderItem={mostrarPjs} onEndReached={cargarMasPjs} keyExtractor={(item) => item.id} />
                     </Styled_View>}
                 </Styled_View>
