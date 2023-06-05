@@ -43,6 +43,13 @@ const villanos = [
     "coli",
     "creepy",
     "gibble",
+    "tuberculosis",
+    "gonorrhea",
+    "bubonic plague",
+    "concerto",
+    "unknown rick",
+    
+
 ]
 
 const Card = ({ item, personajes, setPersonajes }) => {
@@ -54,9 +61,13 @@ const Card = ({ item, personajes, setPersonajes }) => {
         }
     }
     const ifVillano = diccionario['marcarComoVillano'](item.name,villanos);
+    const colorIfVillano = ifVillano ? 'bg-red-500/60' : 'bg-violet-400/40'
+    const ifDeadStatus = item.status === "Dead";
+    const ifUnkownStatus = item.status === "unknown";
+    const colorIfDead = ifDeadStatus?'border-r-red-500':ifUnkownStatus? "border-r-gray-300":'border-r-green-500'
     const imgPj = { uri: item.image };
     return (
-        <Styled_View className={`container items-center ${ifVillano ? 'bg-red-500/60' : 'bg-violet-400/40'}`} style={[styleScaled['mt-6'], styleScaled['py-2'], styleScaled['mb-12']]}>
+        <Styled_View className={`container items-center ${colorIfVillano} border-8 border-indigo-300/20 ${colorIfDead}`} style={[styleScaled['mt-6'], styleScaled['py-2'], styleScaled['mb-12']]}>
             <ImgCard uri={imgPj} img={img} mostrarInfo={mostrarBody} setMostrarInfo={setMostrarBody} personajes={personajes} setPersonajes={setPersonajes} item={item} />
             {mostrarBody && (
                 <>

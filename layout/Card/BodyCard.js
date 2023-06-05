@@ -13,7 +13,7 @@ const Styled_Text = styled(Text);
 
 const BodyCard = ({ item, children }) => {
     if (!children) {
-        return (<Styled_View className="bg-violet-800/60 rounded w-screen text-center"
+        return (<Styled_View className="bg-violet-800/60 rounded w-96 text-center"
             style={[styleScaled['my-2'], styleScaled['px-5'], styleScaled['p-2']]}
         >
             <Styled_Text className="text-white text-2xl text-center">{item.name}</Styled_Text>
