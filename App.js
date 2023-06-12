@@ -7,6 +7,10 @@ import RickyMartin from './views/RickyMartin';
 import { loadCustomFonts } from './styles';
 import { createStackNavigator } from '@react-navigation/stack';
 import Icon from 'react-native-vector-icons/FontAwesome5'
+// react redux
+import { Provider } from 'react-redux';
+// store 
+import store from './redux/store/store';
 
 const Stack = createStackNavigator()
 
@@ -26,20 +30,22 @@ const App = () => {
         return null; // Otra vista de carga o indicador de carga
     }
     return (
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName='Home'>
-                <Stack.Screen name='Home' component={Home} options={{
-                    headerShown: false,
-                }} />
-                <Stack.Screen name='Rick & Morty' component={RickyMartin} options={{
-                    headerStyle: {
-                        backgroundColor: "#c4b5fd",
-                    },
-                    headerTitle:()=><Icon name='home' size={24} />
-                }} />
+        <Provider store={store}>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName='Home'>
+                    <Stack.Screen name='Home' component={Home} options={{
+                        headerShown: false,
+                    }} />
+                    <Stack.Screen name='Rick & Morty' component={RickyMartin} options={{
+                        headerStyle: {
+                            backgroundColor: "#c4b5fd",
+                        },
+                        headerTitle: () => <Icon name='home' size={24} />
+                    }} />
 
-            </Stack.Navigator>
-        </NavigationContainer>
+                </Stack.Navigator>
+            </NavigationContainer>
+        </Provider>
     );
 }
 

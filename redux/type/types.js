@@ -1,0 +1,2 @@
+export const FETCH_PJS_SUCCESS = "FETCH_PJS_SUCCESS"
+export const FETCH_PJS_ERROR = "FETCH_PJS_ERROR"
